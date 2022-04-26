@@ -38,8 +38,8 @@ def call()
                  stage('output')
                   {
                      def my_outputs = new Output()
-                     my_outputs.output(mytool,my_region)
-                     println my_outputs
+                    def result = my_outputs.outputs(mytool,my_region)
+                     println result
                   }
 
               }
