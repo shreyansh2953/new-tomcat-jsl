@@ -8,7 +8,7 @@ def call()
 
        node{
 
-            def mytool = tool 'Terraform' , type: 'terraform'
+            def mytool = tool 'Terraform'
               if("${my_choice}"=="apply")
               {
                     stage('cleanup')
