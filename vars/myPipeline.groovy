@@ -9,35 +9,35 @@ def call()
        node{
 
             def mytool = tool 'Terraform' , type: 'terraform'
-               stage('cleanup')
-              {
-               def clean = new Mycleanup()
-               clean.cleanup()
-              }
-              stage('checkout')
-              {
-                  def ch = new MyCheckout()
-                  ch.git_Checkout(url,branch)
-              }
               if("${my_choice}"=="apply")
               {
+                    stage('cleanup')
+                   {
+                    def clean = new Mycleanup()
+                   clean.cleanup()
+                   }
+                 stage('checkout')
+                  {
+                  def ch = new MyCheckout()
+                  ch.git_Checkout(url,branch)
+                  }
                   stage('plan')
-                {
+                  {
                     def my_plan = new Plan()
                     my_plan.plan(mytool,var_file,my_region)
-                }
+                  }
                   stage('apply')
-                 {
+                   {
                      def my_apply = new Apply()
                      my_apply.apply(mytool,var_file,my_region)
 
-                 }
+                   }
                  stage('output')
-                 {
+                  {
                      def my_outputs = new Output()
                      my_outputs.output(mytool,my_region)
                      println my_outputs
-                 }
+                  }
 
               }
               else{
